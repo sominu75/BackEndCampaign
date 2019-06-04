@@ -21,7 +21,7 @@ class GameControll {
 
     let data = {};
     data.campaign_id = this.roomID;
-    axios.post('http://localhost:3001/api/getCampaign', data)
+    axios.post(NetValues.LOCALHOST_URL + '/api/getCampaign', data)
       .then((response) => {
         console.log('qery:', response.data);
         if (this.isRoom()) {
@@ -166,9 +166,6 @@ class GameControll {
         let client = this.sockets[so_name];
         if (client.u_info != undefined) {
           if (client.u_info.select_id == index) {
-            if(client.u_info.life){
-
-            }
             client.u_info.life = false;
             email.push(client.u_info.email);
           }
@@ -196,7 +193,7 @@ class GameControll {
         }
       }
       console.log('data.email:', data.email);
-      axios.post('http://localhost:3001/api/setWinner', data)
+      axios.post(NetValues.LOCALHOST_URL + '/api/setWinner', data)
         .then((response) => {
           console.log('qery:', response.data);
           if (this.isRoom()) {
